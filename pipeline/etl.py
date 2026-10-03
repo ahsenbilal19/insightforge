@@ -50,11 +50,14 @@ def load(c, p, o):
     load_dotenv()
     # session-mode pooler (DIRECT_URL) is best for a bulk load; fall back to DATABASE_URL
     url = os.environ.get("DIRECT_URL") or os.environ["DATABASE_URL"]
-    url = url.strip().strip("\"'").removeprefix("DIRECT_URL=").removeprefix("DATABASE_URL=").strip()
+    url = url.strip().strip("\"'").removeprefix("DIRECT_URL=").removeprefix("DATABASE_URL=").strip().rstrip(".")
     # force the psycopg2 driver (SQLAlchemy 2.1 defaults to psycopg3 otherwise)
     for prefix in ("postgres://", "postgresql://"):
         if url.startswith(prefix):
             url = "postgresql+psycopg2://" + url[len(prefix):]
+    from sqlalchemy.engine import make_url
+    u = make_url(url)  # print non-secret parts so connection problems are easy to diagnose
+    print(f"Connecting to {u.host}:{u.port}/{u.database} as {u.username}")
     engine = create_engine(url)
     with engine.begin() as conn:
         conn.execute(text("TRUNCATE fact_orders, dim_customers, dim_products RESTART IDENTITY CASCADE"))
