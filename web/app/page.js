@@ -54,6 +54,7 @@ export default function Dashboard() {
           <h1>Insight<span>Forge</span></h1>
           <div className="sub">Sales intelligence · synthetic dataset · completed orders only</div>
         </div>
+        <a className="btn" href="/ask">✦ Ask your data</a>
         <div className="filters">
           <select value={f.year} onChange={set("year")}>
             <option value="">All years</option>

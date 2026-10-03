@@ -28,3 +28,14 @@ td { padding: 10px 8px; border-bottom: 1px solid var(--line); }
 .msg { text-align: center; color: var(--muted); padding: 80px 0; }
 .err { color: #fb7185; }
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.btn { color: var(--text); text-decoration: none; border: 1px solid var(--line); background: var(--card); padding: 9px 16px; border-radius: 10px; cursor: pointer; font-size: 14px; transition: .25s; }
+.btn:hover { border-color: var(--cyan); box-shadow: 0 0 18px rgba(34,211,238,.25); }
+.btn.solid { background: linear-gradient(90deg, #0891b2, #7c3aed); border: 0; font-weight: 600; }
+.btn:disabled { opacity: .6; cursor: wait; }
+.askbox { display: flex; flex-wrap: wrap; gap: 10px; }
+.askbox input { flex: 1; min-width: 240px; background: rgba(0,0,0,.25); color: var(--text); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; outline: none; }
+.askbox input:focus { border-color: var(--cyan); }
+.chips { width: 100%; display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; cursor: pointer; transition: .2s; }
+.chips span:hover { color: var(--cyan); border-color: var(--cyan); }
+pre { white-space: pre-wrap; font-size: 13px; color: #a5f3fc; line-height: 1.5; }
