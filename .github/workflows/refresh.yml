@@ -1,0 +1,25 @@
+name: Refresh data pipeline
+
+on:
+  schedule:
+    - cron: "0 3 * * 0"   # every Sunday 03:00 UTC
+  workflow_dispatch:       # manual "Run workflow" button
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pipeline
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+      - run: pip install -r requirements.txt
+      - run: python generate.py
+      - run: python etl.py
+        env:
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
